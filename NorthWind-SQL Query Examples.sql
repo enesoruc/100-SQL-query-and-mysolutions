@@ -1,4 +1,4 @@
--- Hangi tedarikçiden hangi ürünü kaç adet  temin etmişim? Tedarikci | UrunAdedi
+-- Hangi tedarikÃ§iden hangi Ã¼rÃ¼nÃ¼ kaÃ§ adet  temin etmiÃ¾im? Tedarikci | UrunAdedi
 SELECT s.CompanyName AS Tedarikci,p.ProductName As Urun,SUM(p.UnitsInStock+p.UnitsOnOrder+od.Quantity) AS  Adet
 FROM Products p 
 	JOIN Suppliers s 
@@ -8,7 +8,7 @@ FROM Products p
 GROUP BY s.CompanyName,p.ProductName
 
 
--- Nancy adındaki personelim hangi firmaya toplam kaç adet ürün satmıştır? FirmaAdi | UrunAdet
+-- Nancy adÃ½ndaki personelim hangi firmaya toplam kaÃ§ adet Ã¼rÃ¼n satmÃ½Ã¾tÃ½r? FirmaAdi | UrunAdet
 SELECT c.CompanyName AS FirmaAdi, SUM(od.Quantity) As UrunAdet
 FROM Employees e 
 	JOIN Orders o 
@@ -21,7 +21,7 @@ WHERE e.FirstName='nancy'
 GROUP BY c.CompanyName
 
 
--- Batı bölgesinden sorumlu çalışanlara ait müşteri sayısı bilgisini getirin. Calisan | MusteriSayisi
+-- BatÃ½ bÃ¶lgesinden sorumlu Ã§alÃ½Ã¾anlara ait mÃ¼Ã¾teri sayÃ½sÃ½ bilgisini getirin. Calisan | MusteriSayisi
 SELECT e.FirstName AS Calisan, COUNT(o.CustomerID)
 FROM Employees e 
 	JOIN EmployeeTerritories et 
@@ -36,7 +36,7 @@ WHERE r.RegionDescription='Western'
 GROUP BY e.FirstName
 
 
--- Kategori adı Confections olan ürünleri hangi ülkelere fiyat olarak toplam ne kadar gönderdik ? Ulke | ToplamFiyat
+-- Kategori adÃ½ Confections olan Ã¼rÃ¼nleri hangi Ã¼lkelere fiyat olarak toplam ne kadar gÃ¶nderdik ? Ulke | ToplamFiyat
 SELECT o.ShipCountry AS Ulke, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))
 FROM Categories c 
 	JOIN Products p 
@@ -49,7 +49,7 @@ WHERE c.CategoryName='Confections'
 GROUP BY o.ShipCountry
 
 
--- Her bir ürün için ortalama talep sayısı(ortalama sipariş adeti) bilgisini ürün adıyla beraber listeleyin. UrunAdi | OrtalamaTalepSayısı
+-- Her bir Ã¼rÃ¼n iÃ§in ortalama talep sayÃ½sÃ½(ortalama sipariÃ¾ adeti) bilgisini Ã¼rÃ¼n adÃ½yla beraber listeleyin. UrunAdi | OrtalamaTalepSayÃ½sÃ½
 SELECT p.ProductName AS UrunAdi,AVG(od.Quantity)
 FROM Products p 
 	JOIN [Order Details] od 
@@ -59,7 +59,7 @@ FROM Products p
 GROUP BY p.ProductName
 
 
--- 250'den fazla sipariş taşımış olan kargo firmalarının adlarını, telefon numaralarını ve taşıdıkları sipariş sayılarını getiren sorguyu yazın. FirmaAdi | Telefon | SiparisSayisi
+-- 250'den fazla sipariÃ¾ taÃ¾Ã½mÃ½Ã¾ olan kargo firmalarÃ½nÃ½n adlarÃ½nÃ½, telefon numaralarÃ½nÃ½ ve taÃ¾Ã½dÃ½klarÃ½ sipariÃ¾ sayÃ½larÃ½nÃ½ getiren sorguyu yazÃ½n. FirmaAdi | Telefon | SiparisSayisi
 SELECT s.CompanyName AS FirmaAdi,s.Phone AS Telefon,COUNT(*) AS SiparisSayisi
 FROM Shippers s 
 	JOIN Orders o 
@@ -68,7 +68,7 @@ GROUP BY s.CompanyName,s.Phone
 HAVING COUNT(*)>250
 
 
--- Müşterilerimin toplam sipariş adetlerini Müşteri adı ile birlikte raporlayın	CustomerName | TotalOrdersCount
+-- MÃ¼Ã¾terilerimin toplam sipariÃ¾ adetlerini MÃ¼Ã¾teri adÃ½ ile birlikte raporlayÃ½n	CustomerName | TotalOrdersCount
 SELECT c.CompanyName AS MusteriAdi,COUNT(o.OrderID) AS ToplamSiparisAdedi
 FROM Customers c 
 	JOIN Orders o 
@@ -76,7 +76,7 @@ FROM Customers c
 GROUP BY c.CompanyName
 
 
--- Kargo şirketlerine göre taşınan sipariş sayıları nedir? ShipperName | TotalOrdersCount
+-- Kargo Ã¾irketlerine gÃ¶re taÃ¾Ã½nan sipariÃ¾ sayÃ½larÃ½ nedir? ShipperName | TotalOrdersCount
 SELECT s.CompanyName AS KargoSirketi,COUNT(*)
 FROM Orders o 
 	JOIN Shippers s 
@@ -84,7 +84,7 @@ FROM Orders o
 GROUP BY s.CompanyName
 
 
--- Ürün Id ve isimlerini, bugünkü fiyatı ile birlikte bugüne kadar yer aldığı siparişlerdeki en ucuz fiyat ve bu fiyat ile arasındaki farkı da hesaplayarak listeleyin. ProductID | ProductName | UnitPrice | LowestPrice | Difference
+-- ÃœrÃ¼n Id ve isimlerini, bugÃ¼nkÃ¼ fiyatÃ½ ile birlikte bugÃ¼ne kadar yer aldÃ½Ã°Ã½ sipariÃ¾lerdeki en ucuz fiyat ve bu fiyat ile arasÃ½ndaki farkÃ½ da hesaplayarak listeleyin. ProductID | ProductName | UnitPrice | LowestPrice | Difference
 SELECT p.ProductID  AS UrunID,p.ProductName AS UrunAdi,p.UnitPrice AS GuncelFiyat,MIN(od.UnitPrice) AS EnUcuz,(p.UnitPrice-MIN(od.UnitPrice)) AS Fark
 FROM Products p 
 	JOIN [Order Details] od 
@@ -94,7 +94,7 @@ FROM Products p
 GROUP BY p.ProductName,p.ProductID,p.UnitPrice
 
 
--- Sevilla şehri hariç İspanyaya gönderilen kargoların toplam adedi, toplam tutarı ve ortalama tutarını şehirlere göre raporlayın. City | TotalCount | TotalPrice | Average
+-- Sevilla Ã¾ehri hariÃ§ Ãspanyaya gÃ¶nderilen kargolarÃ½n toplam adedi, toplam tutarÃ½ ve ortalama tutarÃ½nÃ½ Ã¾ehirlere gÃ¶re raporlayÃ½n. City | TotalCount | TotalPrice | Average
 SELECT o.ShipCity AS GonderilenSehir,COUNT(*) AS ToplamKargoAdedi,SUM(od.UnitPrice) AS ToplamTutar,AVG(od.UnitPrice) AS OrtalamaTutar
 FROM Orders o 
 	JOIN [Order Details] od 
@@ -103,13 +103,13 @@ WHERE o.ShipCity<>'Sevilla' AND o.ShipCountry='spain'
 GROUP BY o.ShipCity
 
 
--- Her yıl hangi ülkeye kaç adet sipariş göndermişim? Year | Country | TotalOrdersCount
+-- Her yÃ½l hangi Ã¼lkeye kaÃ§ adet sipariÃ¾ gÃ¶ndermiÃ¾im? Year | Country | TotalOrdersCount
 SELECT YEAR(o.OrderDate) AS Yil,o.ShipCountry AS Ulke,COUNT(*) AS Adet
 FROM Orders o
 GROUP BY o.ShipCountry,YEAR(o.OrderDate)
 
 
--- En değerli müşterim kim? (Bana en çok para kazandıran)
+-- En deÃ°erli mÃ¼Ã¾terim kim? (Bana en Ã§ok para kazandÃ½ran)
 SELECT  TOP 1 c.CompanyName AS MusteriAdi,SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS [PARA PARA PARA]
 FROM Customers c 
 	JOIN Orders o 
@@ -120,7 +120,7 @@ GROUP BY c.CompanyName
 ORDER BY [PARA PARA PARA] DESC
 
 
--- Şehir bazında sipariş adetlerim nelerdir? City | Count
+-- Ãehir bazÃ½nda sipariÃ¾ adetlerim nelerdir? City | Count
 SELECT o.ShipCity AS Sehir,SUM(od.Quantity) AS SiparisAdedi
 FROM Orders o JOIN [Order Details] od 
 	ON od.OrderID=o.OrderID
