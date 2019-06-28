@@ -1,4 +1,4 @@
--- Bir kategoriye 15 ten fazla ürün eklenemesin.
+-- Bir kategoriye 15 ten fazla Ã¼rÃ¼n eklenemesin.
 CREATE TRIGGER trg_UrunEkleme
 ON Products
 INSTEAD OF INSERT
@@ -20,7 +20,7 @@ BEGIN
 
 	IF @kategoriAdet>=15
 	BEGIN 
-	PRINT '15 adet üründen fazla ürün girilemez'
+	PRINT '15 adet Ã¼rÃ¼nden fazla Ã¼rÃ¼n girilemez'
 	END
 	ELSE
 	BEGIN
@@ -34,8 +34,8 @@ VALUES('enes','1','1')
 
 
 
--- Çalışanlarım aynı gün içerisinde bir müşteriye en fazla 2 sipariş gönderebilsin.
--- 10 siparişten sonra müşteriye aldığı ürünlerde %10 indirim uygulasın.
+-- Ã‡alÃ½Ã¾anlarÃ½m aynÃ½ gÃ¼n iÃ§erisinde bir mÃ¼Ã¾teriye en fazla 2 sipariÃ¾ gÃ¶nderebilsin.
+-- 10 sipariÃ¾ten sonra mÃ¼Ã¾teriye aldÃ½Ã°Ã½ Ã¼rÃ¼nlerde %10 indirim uygulasÃ½n.
 GO
 
 CREATE TRIGGER trg_IndirimUygula
@@ -75,9 +75,9 @@ BEGIN
 END
 
 GO
--- Sipariş verilirken, siparişte yer alan ürünlerden herhangi biri kritik seviyenin altına düşüyorsa siparişi kaydetmeyip uyarı versin.
+-- SipariÃ¾ verilirken, sipariÃ¾te yer alan Ã¼rÃ¼nlerden herhangi biri kritik seviyenin altÃ½na dÃ¼Ã¾Ã¼yorsa sipariÃ¾i kaydetmeyip uyarÃ½ versin.
 
-CREATE TRIGGER trg_KritikSeviyeUyarı
+CREATE TRIGGER trg_KritikSeviyeUyarÃ½
 ON Orders
 INSTEAD OF INSERT
 AS
@@ -93,7 +93,7 @@ END
 
 
 
--- Verilen siparişteki bir ürünün adet bilgisi yanlış girilmiş ve düzeltilmek istendiğinde o ürünün stok bilgisini de düzeltsin.
+-- Verilen sipariÃ¾teki bir Ã¼rÃ¼nÃ¼n adet bilgisi yanlÃ½Ã¾ girilmiÃ¾ ve dÃ¼zeltilmek istendiÃ°inde o Ã¼rÃ¼nÃ¼n stok bilgisini de dÃ¼zeltsin.
 GO
 
 CREATE TRIGGER trg_StokDuzelt
